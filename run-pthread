@@ -1,0 +1,27 @@
+#!/bin/bash  
+#SBATCH --job-name="pthread"  
+#SBATCH --output="pthread-compare.%j.%N.out"  
+#SBATCH --partition=compute  
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --export=ALL  
+#SBATCH -t 01:30:00  
+
+export OMP_NUM_THREADS=24
+echo "Running 24 cores."
+srun -c 24 time ./benchmark-tp 2
+srun -c 24 time ./benchmark-tp 4
+srun -c 24 time ./benchmark-tp 8
+srun -c 24 time ./benchmark-tp 10
+srun -c 24 time ./benchmark-tp 16
+srun -c 24 time ./benchmark-tp 20
+srun -c 24 time ./benchmark-tp 32
+
+echo "Running 8 cores."
+srun -c 8 time ./benchmark-tp 2
+srun -c 8 time ./benchmark-tp 4
+srun -c 8 time ./benchmark-tp 8
+srun -c 8 time ./benchmark-tp 10
+srun -c 8 time ./benchmark-tp 16
+srun -c 8 time ./benchmark-tp 20
+srun -c 8 time ./benchmark-tp 32
