@@ -1,0 +1,30 @@
+#!/bin/bash  
+#SBATCH --job-name="openmp-24"  
+#SBATCH --output="openmp.%j.%N.out"  
+#SBATCH --partition=compute  
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --export=ALL  
+#SBATCH -t 01:30:00  
+
+
+export OMP_NUM_THREADS=24
+echo "with 24 cores."
+srun -c 24 time ./benchmark-naive
+
+
+export OMP_NUM_THREADS=16
+echo "with 16 cores."
+srun -c 16 time ./benchmark-naive
+
+export OMP_NUM_THREADS=8
+echo "with 8 cores."
+srun -c 8 time ./benchmark-naive
+
+export OMP_NUM_THREADS=4
+echo "with 4 cores."
+srun -c 4 time ./benchmark-naive
+
+export OMP_NUM_THREADS=1
+echo "with 1 core."
+srun -c 1 time ./benchmark-naive
