@@ -1,3 +1,7 @@
+
+//Write the optimized pthreads code for parallel matrix multiplication
+//so that you can obtain the "best" megaflops performance for n=1600 running on a cluster 
+//node with 8 and 24 cores. Report megaflops numbers and parallel time accomplished.
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
